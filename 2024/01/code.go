@@ -44,6 +44,7 @@ func run(part2 bool, input string) any {
 	}
 
 	if part2 {
+		// similarity score
 		var score int = 0
 		rightCountMap := make(map[int]int)
 		for _, val := range rightCol {
