@@ -32,8 +32,9 @@ func run(part2 bool, input string) any {
 			safe := isReportSafe(levels)
 
 			if !safe {
-				for removePos := 0; removePos < 5; removePos++ {
-					temp := append([]string{}, levels...)
+				for removePos := 0; removePos < len(levels); removePos++ {
+					temp := make([]string, len(levels))
+					copy(temp, levels)
 					newReport := append(temp[:removePos], temp[removePos+1:]...)
 					if isReportSafe(newReport) {
 						safe = true
