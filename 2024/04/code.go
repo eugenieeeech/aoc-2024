@@ -66,7 +66,43 @@ func run(part2 bool, input string) any {
 	}
 
 	if part2 {
-		return "not implemented"
+		result = 0
+
+		// Find crossed MAS in the map
+		// X-MAS puzzle in which you're supposed to find two MAS in the shape of an X.
+		for i := range arr {
+			for j := range arr[i] {
+				if arr[i][j] == "A" {
+					leftCross := false
+					rightCross := false
+					// check adjacent seats
+					if i-1 >= 0 && j+1 < len(arr[i]) && arr[i-1][j+1] == "M" {
+						if i+1 < len(arr) && j-1 >= 0 && arr[i+1][j-1] == "S" {
+							leftCross = true
+						}
+					}
+					if i-1 >= 0 && j+1 < len(arr[i]) && arr[i-1][j+1] == "S" {
+						if i+1 < len(arr) && j-1 >= 0 && arr[i+1][j-1] == "M" {
+							leftCross = true
+						}
+					}
+					if i-1 >= 0 && j-1 >= 0 && arr[i-1][j-1] == "M" {
+						if i+1 < len(arr) && j+1 < len(arr[i]) && arr[i+1][j+1] == "S" {
+							rightCross = true
+						}
+					}
+					if i-1 >= 0 && j-1 >= 0 && arr[i-1][j-1] == "S" {
+						if i+1 < len(arr) && j+1 < len(arr[i]) && arr[i+1][j+1] == "M" {
+							rightCross = true
+						}
+					}
+					if leftCross && rightCross {
+						result++
+					}
+				}
+			}
+		}
+		return result
 	}
 	// solve part 1 here
 	return result
